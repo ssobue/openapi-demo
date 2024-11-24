@@ -1,0 +1,238 @@
+openapi: 3.0.1
+info:
+  title: Management APIs
+  contact:
+    name: Sho SOBUE
+  version: "1.0"
+servers:
+- url: http://localhost:8080
+  description: Local development
+- url: https://test.example.com
+  description: Test Server
+- url: https://example.jp
+  description: Production Server
+tags:
+- name: Employees
+  description: Employee management APIs
+- name: Departments
+  description: Department management APIs
+paths:
+  /api/v1/employees/{id}:
+    get:
+      tags:
+      - Employees
+      summary: Get an employee by ID
+      operationId: getEmployeeById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/EmployeeDto"
+    put:
+      tags:
+      - Employees
+      summary: Update an employee by ID
+      operationId: updateEmployee
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+      - Employees
+      summary: Delete an employee by ID
+      operationId: deleteEmployee
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+  /api/v1/department/{id}:
+    get:
+      tags:
+      - Departments
+      summary: Get a department by ID
+      operationId: getDepartmentById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/DepartmentDto"
+    put:
+      tags:
+      - Departments
+      summary: Update a department by ID
+      operationId: updateEmployee_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DepartmentDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+    delete:
+      tags:
+      - Departments
+      summary: Delete a department by ID
+      operationId: deleteEmployee_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+  /api/v1/employees:
+    get:
+      tags:
+      - Employees
+      summary: Get all employees
+      operationId: getAllEmployees
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmployeeDto"
+    post:
+      tags:
+      - Employees
+      summary: Create an employee
+      operationId: createEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EmployeeDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+  /api/v1/department:
+    get:
+      tags:
+      - Departments
+      summary: Get all departments
+      operationId: getAllDepartments
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DepartmentDto"
+    post:
+      tags:
+      - Departments
+      summary: Create a department
+      operationId: createEmployee_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DepartmentDto"
+        required: true
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    EmployeeDto:
+      title: Employee
+      required:
+      - departmentId
+      - email
+      - name
+      type: object
+      properties:
+        id:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: Employee ID
+          format: int32
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          description: Name
+          example: John Smith
+        email:
+          type: string
+          description: E-Mail
+          example: john@example.com
+        departmentId:
+          type: integer
+          description: Department ID. Requires registered department id
+          format: int32
+          example: 1
+    DepartmentDto:
+      title: Department
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+          description: Department ID
+          format: int32
+          readOnly: true
+          example: 1
+        name:
+          type: string
+          description: Department Name
+          example: Marketing & Sales

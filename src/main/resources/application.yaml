@@ -1,12 +1,12 @@
+# Spring Configuration
 spring:
   application:
-    name: demo
-  main:
-    banner-mode: off
+    name: openapi-demo
   profiles:
     active: dev
 
-logging:
-  level:
-    root: info
-    org.springframework: warn
+# MyBatis Configuration
+mybatis:
+  configuration:
+    cache-enabled: false
+    jdbc-type-for-null: varchar

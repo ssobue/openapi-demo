@@ -1,0 +1,21 @@
+# Spring Configuration
+spring:
+  sql:
+    init:
+      # setup database using Docker image
+      mode: always
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        # for development
+        include: '*'
+
+# Logging Configuration
+logging:
+  level:
+    root: info
+    # show SQL logs
+    jp.sobue.demo: debug

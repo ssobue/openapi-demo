@@ -1,0 +1,18 @@
+version: 2.1
+
+orbs:
+  # https://circleci.com/developer/orbs/orb/circleci/gradle
+  maven: circleci/gradle@3.0.0
+
+executors:
+  openjdk21:
+    docker:
+      # https://circleci.com/developer/ja/images/image/cimg/openjdk
+      - image: cimg/openjdk:21.0
+
+workflows:
+  verify:
+    jobs:
+      - gradle/test:
+          name: test
+          executor: openjdk21

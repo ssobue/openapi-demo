@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   # https://circleci.com/developer/orbs/orb/circleci/gradle
-  maven: circleci/gradle@3.0.0
+  gradle: circleci/gradle@3.0.0
 
 executors:
   openjdk21:

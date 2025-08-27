@@ -8,9 +8,6 @@ plugins {
 group = 'jp.sobue.demo'
 version = '0.0.1-SNAPSHOT'
 
-// Fixes for CVE-2025-48924
-ext['commons-lang3.version'] = '3.18.0'
-
 java {
     sourceCompatibility = '21'
 }
@@ -25,14 +22,20 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation(enforcedPlatform('org.springframework.boot:spring-boot-dependencies:3.5.5'))
+dependencyManagement {
+    imports { mavenBom 'org.springframework.boot:spring-boot-dependencies:3.5.5' }
+}
 
+// Fixes for CVE-2025-48924
+ext['commons-lang3.version'] = '3.18.0'
+
+dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5'
+    runtimeOnly 'com.mysql:mysql-connector-j'
     // // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
     implementation 'org.mapstruct:mapstruct:1.6.3'
 
@@ -42,25 +45,17 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 
-    implementation 'org.springframework.boot:spring-boot-testcontainers'
-    implementation 'org.testcontainers:mysql'
-    runtimeOnly 'com.mysql:mysql-connector-j'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter-test
     testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'
+
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.testcontainers:mysql'
 }
 
-tasks.named('test') {
+tasks.named('test', Test) {
     useJUnitPlatform()
     // Skip Tests
     failOnNoDiscoveredTests = false
-}
-
-test {
-    finalizedBy jacocoTestReport
-}
-
-jacocoTestReport {
-    dependsOn test
+    finalizedBy(tasks.jacocoTestReport)
 }

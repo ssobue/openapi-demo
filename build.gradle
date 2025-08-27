@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id 'java'
     id 'jacoco'
@@ -10,8 +12,6 @@ version = '0.0.1-SNAPSHOT'
 
 // Fixes for CVE-2025-48924
 ext['commons-lang3.version'] = '3.18.0'
-// Fixes for CVE-2025-41242
-ext['spring-framework.version'] = '6.2.10'
 
 java {
     sourceCompatibility = '21'
@@ -28,6 +28,8 @@ repositories {
 }
 
 dependencies {
+    implementation(platform(SpringBootPlugin.BOM_COORDINATES))
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-validation'

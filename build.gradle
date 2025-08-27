@@ -51,6 +51,9 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
     testImplementation 'org.testcontainers:mysql'
+
+    // Fixes for CVE-2024-25710
+    testImplementation 'org.apache.commons:commons-compress:1.28.0'
 }
 
 tasks.named('test', Test) {

@@ -8,9 +8,19 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+/**
+ * Department Mapper.
+ *
+ * @author Sho SOBUE
+ */
 @Mapper
 public interface DepartmentMapper {
 
+  /**
+   * Find all departments.
+   *
+   * @return List of departments
+   */
   @Select("""
           SELECT
               d.id,
@@ -24,6 +34,12 @@ public interface DepartmentMapper {
   @ResultMap("departmentMap")
   List<Department> findAll();
 
+  /**
+   * Find a department by ID.
+   *
+   * @param id ID
+   * @return Department
+   */
   @Select("""
           SELECT
               d.id,
@@ -37,12 +53,24 @@ public interface DepartmentMapper {
   @ResultMap("departmentMap")
   Department findById(Integer id);
 
+  /**
+   * Insert a department.
+   *
+   * @param department Department
+   * @return Number of rows affected
+   */
   @Insert("""
            INSERT INTO department (name, updated_by, updated_on)
               VALUES (#{name}, #{updatedBy}, #{updatedOn})
       """)
   int insert(Department department);
 
+  /**
+   * Update a department.
+   *
+   * @param department Department
+   * @return Number of rows affected
+   */
   @Update("""
               UPDATE department
               SET

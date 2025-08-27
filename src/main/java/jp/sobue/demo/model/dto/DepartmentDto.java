@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * Department.
+ * Department DTO.
  *
  * @author Sho SOBUE
  */

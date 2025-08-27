@@ -11,12 +11,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
+/**
+ * Employee DTO.
+ *
+ * @author Sho SOBUE
+ */
 @Data
 @Builder
 @ToString
 @Schema(title = "Employee")
 public class EmployeeDto {
 
+  /**
+   * Employee ID
+   */
   @Schema(
       description = "Employee ID",
       example = "1",
@@ -35,6 +43,9 @@ public class EmployeeDto {
   @Min(100)
   private String name;
 
+  /**
+   * E-Mail
+   */
   @Email
   @Schema(
       description = "E-Mail",
@@ -45,6 +56,9 @@ public class EmployeeDto {
   @Max(300)
   private String email;
 
+  /**
+   * Department ID
+   */
   @NotNull
   @Schema(
       description = "Department ID. Requires registered department id",

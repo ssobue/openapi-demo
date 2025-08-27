@@ -22,11 +22,12 @@ public class ContainerConfiguration {
    * @see <a href="https://docs.spring.io/spring-boot/reference/testing/testcontainers.html">Spring
    * Boot Document</a>
    */
-  @Bean
+  @Bean(destroyMethod = "stop")
   @ServiceConnection(name = "jdbc")
   public MySQLContainer<?> mySqlContainer() {
     var log = LoggerFactory.getLogger(MySQLContainer.class);
     return new MySQLContainer<>("mysql:8.0")
-        .withLogConsumer(new Slf4jLogConsumer(log));
+        .withLogConsumer(new Slf4jLogConsumer(log))
+        .withReuse(false);
   }
 }

@@ -40,6 +40,11 @@ public class DepartmentController {
    */
   private final DepartmentService departmentService;
 
+  /**
+   * Get all departments.
+   *
+   * @return List of departments
+   */
   @Operation(summary = "Get all departments")
   @GetMapping
   public List<DepartmentDto> getAllDepartments() {
@@ -50,12 +55,23 @@ public class DepartmentController {
         .toList();
   }
 
+  /**
+   * Get a department by ID.
+   *
+   * @param id ID
+   * @return Department
+   */
   @Operation(summary = "Get a department by ID")
   @GetMapping("/{id}")
   public DepartmentDto getDepartmentById(@PathVariable Integer id) {
     return MAPPER.toDto(departmentService.getById(id));
   }
 
+  /**
+   * Create a department.
+   *
+   * @param departmentDto Department DTO
+   */
   @Operation(summary = "Create a department")
   @PostMapping
   public void createEmployee(
@@ -63,6 +79,12 @@ public class DepartmentController {
     departmentService.create(MAPPER.toEntity(departmentDto));
   }
 
+  /**
+   * Update a department by ID.
+   *
+   * @param id ID
+   * @param departmentDto Department DTO
+   */
   @Operation(summary = "Update a department by ID")
   @PutMapping("/{id}")
   public void updateEmployee(
@@ -72,6 +94,11 @@ public class DepartmentController {
     departmentService.update(MAPPER.toEntity(departmentDto));
   }
 
+  /**
+   * Delete a department by ID.
+   *
+   * @param id ID
+   */
   @Operation(summary = "Delete a department by ID")
   @DeleteMapping("/{id}")
   public void deleteEmployee(@PathVariable Integer id) {

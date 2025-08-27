@@ -1,3 +1,4 @@
+-- Department Table
 CREATE TABLE IF NOT EXISTS department
 (
     id         INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -7,6 +8,7 @@ CREATE TABLE IF NOT EXISTS department
     deleted    TINYINT(1) DEFAULT '0' NOT NULL
 );
 
+-- Employee Table
 CREATE TABLE IF NOT EXISTS employee
 (
     id            INTEGER AUTO_INCREMENT PRIMARY KEY,

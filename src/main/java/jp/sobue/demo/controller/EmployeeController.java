@@ -40,6 +40,11 @@ public class EmployeeController {
    */
   private final EmployeeService employeeService;
 
+  /**
+   * Get all employees.
+   *
+   * @return List of employees
+   */
   @Operation(summary = "Get all employees")
   @GetMapping
   public List<EmployeeDto> getAllEmployees() {
@@ -50,12 +55,23 @@ public class EmployeeController {
         .toList();
   }
 
+  /**
+   * Get an employee by ID.
+   *
+   * @param id ID
+   * @return Employee
+   */
   @Operation(summary = "Get an employee by ID")
   @GetMapping("/{id}")
   public EmployeeDto getEmployeeById(@PathVariable Integer id) {
     return MAPPER.toDto(employeeService.getById(id));
   }
 
+  /**
+   * Create an employee.
+   *
+   * @param employeeDto Employee DTO
+   */
   @Operation(summary = "Create an employee")
   @PostMapping
   public void createEmployee(
@@ -63,6 +79,12 @@ public class EmployeeController {
     employeeService.create(MAPPER.toEntity(employeeDto));
   }
 
+  /**
+   * Update an employee by ID.
+   *
+   * @param id ID
+   * @param employeeDto Employee DTO
+   */
   @Operation(summary = "Update an employee by ID")
   @PutMapping("/{id}")
   public void updateEmployee(
@@ -72,6 +94,11 @@ public class EmployeeController {
     employeeService.update(MAPPER.toEntity(employeeDto));
   }
 
+  /**
+   * Delete an employee by ID.
+   *
+   * @param id ID
+   */
   @Operation(summary = "Delete an employee by ID")
   @DeleteMapping("/{id}")
   public void deleteEmployee(@PathVariable Integer id) {

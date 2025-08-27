@@ -8,9 +8,19 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+/**
+ * Employee Mapper.
+ *
+ * @author Sho SOBUE
+ */
 @Mapper
 public interface EmployeeMapper {
 
+  /**
+   * Find all employees.
+   *
+   * @return List of employees
+   */
   @Select("""
           SELECT
               e.id,
@@ -26,6 +36,12 @@ public interface EmployeeMapper {
   @ResultMap("employeeMap")
   List<Employee> findAll();
 
+  /**
+   * Find an employee by ID.
+   *
+   * @param id ID
+   * @return Employee
+   */
   @Select("""
           SELECT
               e.id,
@@ -41,6 +57,12 @@ public interface EmployeeMapper {
   @ResultMap("employeeMap")
   Employee findById(Integer id);
 
+  /**
+   * Insert an employee.
+   *
+   * @param employee Employee
+   * @return Number of rows affected
+   */
   @Insert("""
           INSERT INTO employee
               (name, email, department_id, updated_by, updated_on)
@@ -49,6 +71,12 @@ public interface EmployeeMapper {
       """)
   int insert(Employee employee);
 
+  /**
+   * Update an employee.
+   *
+   * @param employee Employee
+   * @return Number of rows affected
+   */
   @Update("""
         UPDATE employee
         SET

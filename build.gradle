@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
-    id 'org.springframework.boot' version "3.5.7"
+    id 'org.springframework.boot' version "4.0.0"
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencyManagement {
-    imports { mavenBom 'org.springframework.boot:spring-boot-dependencies:3.5.7' }
+    imports { mavenBom 'org.springframework.boot:spring-boot-dependencies:4.0.0' }
 }
 
 // Fixes for CVE-2025-48924
